@@ -18,11 +18,11 @@ jobs:
     - name: Create Assembly Signing Key
       run: | 
         echo $ASSEMBLY_SIGNING_KEY | base64 -d > Avalara.AvaTax.RestClient.snk
-        if [ -f "Avalara.AvaTax.RestClient.snk" ]; then
-             echo "Avalara.AvaTax.RestClient.snk exists."
-        else
-            echo "Avalara.AvaTax.RestClient.snk not found."
-        fi
+        if exist Avalara.AvaTax.RestClient.snk (
+          rem file exists
+        ) else (
+          rem file doesn't exist
+        )
         working-directory: src
         env:
          ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}
