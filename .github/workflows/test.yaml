@@ -18,7 +18,7 @@ jobs:
     - name: Create Assembly Signing Key
       run: | 
         echo $ASSEMBLY_SIGNING_KEY | base64 -d > Avalara.AvaTax.RestClient.snk
-        more Avalara.AvaTax.RestClient.snk
+        dir
       working-directory: src
       env:
         ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}
