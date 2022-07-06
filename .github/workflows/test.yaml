@@ -19,9 +19,9 @@ jobs:
       run: | 
         echo $ASSEMBLY_SIGNING_KEY | base64 -d > Avalara.AvaTax.RestClient.snk
         more Avalara.AvaTax.RestClient.snk
-        working-directory: src
-        env:
-         ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}
+      working-directory: src
+      env:
+        ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}
     - name: Set env
       run: |
         echo "SANDBOX_USERNAME=${{ secrets.SANDBOX_USERNAME }}" >> $GITHUB_ENV
