@@ -25,6 +25,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1
     - name: Create Assembly Signing Key
       run: | 
+        echo $ASSEMBLY_SIGNING_KEY
         echo $ASSEMBLY_SIGNING_KEY | base64 -d > src/Avalara.AvaTax.RestClient.snk
       env:
         ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}
