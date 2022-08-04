@@ -41,5 +41,5 @@ jobs:
       run: dotnet build Avalara.AvaTax.RestClient.Test.csproj --no-restore --configuration Release
       working-directory: tests
     - name: Run Tests
-      run: dotnet test Avalara.AvaTax.RestClient.Test.csproj --no-build --verbosity diag
+      run: dotnet test Avalara.AvaTax.RestClient.Test.csproj --no-build
       working-directory: tests
