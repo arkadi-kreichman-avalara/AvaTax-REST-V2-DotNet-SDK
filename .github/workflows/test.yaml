@@ -1,0 +1,44 @@
+name: DotNet- Build and Test
+
+on:
+  push:
+    branches: [ AvaTax-REST-V2-DotNet-SDK-Refactoring ]
+   
+#workflow_dispatch:
+
+jobs:
+  test:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set env
+      run: |
+        echo "SANDBOX_USERNAME=${{ secrets.SANDBOX_USERNAME }}" >> $GITHUB_ENV
+        echo "SANDBOX_PASSWORD=${{ secrets.SANDBOX_PASSWORD }}" >> $GITHUB_ENV
+    - name: Setup .NET 
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: | 
+          2.x.x
+          2.2.x
+          3.1.x
+          5.0.x
+          6.0.x
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Restore Tests
+      run: dotnet restore Avalara.AvaTax.RestClient.Test.csproj
+      working-directory: tests
+    - name: Create Assembly Signing Key
+      run: |
+        echo "${{ secrets.ASSEMBLY_SIGNING_KEY }}" > data.b64 && certutil -decode data.b64 Avalara.AvaTax.RestClient.snk
+      working-directory: src
+    - name: Build Tests
+      run: dotnet build Avalara.AvaTax.RestClient.Test.csproj --no-restore --configuration Release
+      working-directory: tests
+    - name: Run Tests
+      run: dotnet test Avalara.AvaTax.RestClient.Test.csproj --no-build --configuration Release
+      working-directory: tests
