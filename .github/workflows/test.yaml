@@ -22,7 +22,9 @@ jobs:
         echo "SANDBOX_USERNAME=${{ secrets.SANDBOX_USERNAME }}" >> $GITHUB_ENV
         echo "SANDBOX_PASSWORD=${{ secrets.SANDBOX_PASSWORD }}" >> $GITHUB_ENV
     - name: Create Assembly Signing Key
-      run: 'echo "$ASSEMBLY_SIGNING_KEY"'
+      run: |
+        echo "$ASSEMBLY_SIGNING_KEY" > test.sec
+        cat test.sec
       working-directory: src
       env:
         ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}"
