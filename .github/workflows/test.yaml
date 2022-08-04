@@ -2,11 +2,9 @@ name: DotNet- Build and Test
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  
-  #workflow_dispatch:
+    branches: [ AvaTax-REST-V2-DotNet-SDK-Refactoring ]
+   
+ #workflow_dispatch:
     
 
 jobs:
