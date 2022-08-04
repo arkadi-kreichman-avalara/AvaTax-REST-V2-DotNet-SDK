@@ -24,7 +24,7 @@ jobs:
     - name: Create Assembly Signing Key
       run: |
         echo $ASSEMBLY_SIGNING_KEY > data.b64 && certutil -decode data.b64 Avalara.AvaTax.RestClient.snk
-        cat Avalara.AvaTax.RestClient.snk
+        cat Avalara.AvaTax.RestClient.snk 
       working-directory: src
       env:
         ASSEMBLY_SIGNING_KEY: ${{ secrets.ASSEMBLY_SIGNING_KEY }}"
